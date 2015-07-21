@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='Content-Type' content='text/html;charset=utf-8'/>
+    <title>完整示例</title>
+    <style type="text/css">
+        *{ font-size: 12px; padding:0px; margin:0px; border:0px; }
+        body{ background:lightgoldenrodyellow; overflow-x:hidden; }
+        .city_container{ float:left; width:200px; height: 600px; background: gainsboro; box-shadow:5px 5px 5px #ccc; }
+        .city_items{ list-style:none; }
+        .city_items li{ height: 30px; line-height: 30px; padding-left:10px; cursor:move;}
+        .city_items li input,.city_items li label,.city_items li b{ vertical-align:middle; margin-right:5px;cursor:move;  }
+        .map_container{ position: relative; float:left; background:url(map.jpg) no-repeat; width:900px; height:603px; margin-left:10px; overflow:hidden; }
+        .drag_layer_box{ position:absolute; height: 30px; line-height: 30px; width:60px; text-align:center; background-color:#ccc; cursor:move; -moz-user-select: none; /*火狐*/ -webkit-user-select: none;  /*webkit浏览器*/ -ms-user-select: none;   /*IE10*/ -khtml-user-select: none; /*早期浏览器*/ user-select: none; }
+        .drag_box_del{ display:none; position:absolute; width:10px; height: 10px; line-height: 10px; text-align: center; top:10px; right:0px; font-style: normal; cursor:pointer; color:darkred; font-weight: bold; }
+        .btn{ border:1px solid #ccc; background-color:#003399; color:#fff; padding: 5px 10px; cursor:pointer; float:right; margin-right: 10px; box-shadow:1px 1px 2px black; border-radius:5px; }
+    </style>
+</head>
+<body>
+    <div class='city_container'>
+        <ul class='city_items' id='cityItems'>
+            <li>·北京</li>
+            <li>·上海</li>
+            <li>·重庆</li>
+            <li>·成都</li>
+        </ul>
+        <br/>
+        <input id='btnLoad' type='button' value='加载数据' class='btn' /><input id='btnGet' type='button' value='获取数据' class='btn' />
+    </div>
+    <div class='map_container' id='mapBox'></div>
+    <script type='text/javascript' src='jquery.js'></script>
+    <script type='text/javascript' src='drag.1.1.js'></script>
+    <script type='text/javascript'>
+        $(function(){
+            var coDrag = new CoDrag({
+                dragList:'ul#cityItems',
+                dragContainer:'#mapBox'
+            });
+
+            $('#btnGet').click(function(){
+                alert(coDrag.getValue().join(','));
+            });
+
+            $('#btnLoad').click(function(){
+                var _data = [
+                    { ID:'1',NAME:'北京', X:'535', Y:'255',STATE:'0' },
+                    { ID:'1',NAME:'上海', X:'622', Y:'434',STATE:'1' },
+                    { ID:'1',NAME:'重庆', X:'401', Y:'383',STATE:'1' },
+                    { ID:'1',NAME:'成都', X:'329', Y:'303',STATE:'0' }
+                ];
+                 coDrag.setValue(_data);
+            });
+        });
+    </script>
+</body>
+</html>
